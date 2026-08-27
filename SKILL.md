@@ -1,13 +1,13 @@
 ---
-name: product-demo-video
+name: product-demo-video-skill
 description: Record and finish polished product demo videos from a real application or website. Use for browser walkthroughs, launch demos, feature tours, raw UI recordings, captions, zooms, music, transitions, and delivery-ready MP4 exports. Prefer real product interaction over recreated or generated interfaces.
 license: MIT
 metadata:
   author: afnanksalal
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
-# Product Demo Video
+# Product Demo Video Skill
 
 Create a concise, credible demo from the actual product. Record real interactions, finish them with deterministic media tooling, and verify the exported file before delivery.
 

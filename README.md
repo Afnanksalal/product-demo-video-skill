@@ -1,4 +1,4 @@
-# Product Demo Video
+# Product Demo Video Skill
 
 An open Agent Skill for recording polished product demos from the real application. It combines product inspection, Playwright browser capture, FFmpeg finishing, silent-demo captions, smooth framing, licensed music handling, and technical plus visual QA.
 
@@ -27,15 +27,15 @@ It does not generate a fake HTML recreation of the product. The default workflow
 Clone the repository into your user skills directory:
 
 ```bash
-git clone https://github.com/Afnanksalal/product-demo-video.git ~/.agents/skills/product-demo-video
+git clone https://github.com/Afnanksalal/product-demo-video-skill.git ~/.agents/skills/product-demo-video-skill
 ```
 
-Codex also discovers repository-scoped skills placed at `.agents/skills/product-demo-video`. Restart Codex only if the skill does not appear automatically.
+Codex also discovers repository-scoped skills placed at `.agents/skills/product-demo-video-skill`. Restart Codex only if the skill does not appear automatically.
 
 PowerShell:
 
 ```powershell
-git clone https://github.com/Afnanksalal/product-demo-video.git "$HOME\.agents\skills\product-demo-video"
+git clone https://github.com/Afnanksalal/product-demo-video-skill.git "$HOME\.agents\skills\product-demo-video-skill"
 ```
 
 ## Install for Claude Code
@@ -43,15 +43,15 @@ git clone https://github.com/Afnanksalal/product-demo-video.git "$HOME\.agents\s
 Clone it as a personal skill:
 
 ```bash
-git clone https://github.com/Afnanksalal/product-demo-video.git ~/.claude/skills/product-demo-video
+git clone https://github.com/Afnanksalal/product-demo-video-skill.git ~/.claude/skills/product-demo-video-skill
 ```
 
-For one project, place it at `.claude/skills/product-demo-video` instead.
+For one project, place it at `.claude/skills/product-demo-video-skill` instead.
 
 PowerShell:
 
 ```powershell
-git clone https://github.com/Afnanksalal/product-demo-video.git "$HOME\.claude\skills\product-demo-video"
+git clone https://github.com/Afnanksalal/product-demo-video-skill.git "$HOME\.claude\skills\product-demo-video-skill"
 ```
 
 ## Use
@@ -59,7 +59,7 @@ git clone https://github.com/Afnanksalal/product-demo-video.git "$HOME\.claude\s
 Invoke it explicitly:
 
 ```text
-$product-demo-video record a five-minute product demo of this application, show real inputs and results, add concise captions and licensed background music, then export and verify a high-resolution MP4.
+$product-demo-video-skill record a five-minute product demo of this application, show real inputs and results, add concise captions and licensed background music, then export and verify a high-resolution MP4.
 ```
 
 The skill can also activate automatically for product-demo recording and finishing requests.

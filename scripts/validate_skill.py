@@ -77,7 +77,7 @@ def main() -> int:
         for error in errors:
             print(f"FAIL: {error}", file=sys.stderr)
         return 1
-    print(f"PASS: {root} is a valid product-demo-video skill package")
+    print(f"PASS: {root} is a valid product-demo-video-skill package")
     return 0
 
 
