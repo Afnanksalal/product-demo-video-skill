@@ -209,6 +209,8 @@ def build_audio_filters(
     music_probe: dict[str, Any] | None,
     music_input_count: int,
     music_tempo: float,
+    voiceover_probe: dict[str, Any] | None = None,
+    voiceover_input_index: int | None = None,
 ) -> list[str]:
     music = config.get("music") or {}
     fade = config.get("fade") or {}
@@ -216,6 +218,7 @@ def build_audio_filters(
     fade_out = number(fade.get("out"), 0.6, "fade.out")
     filters: list[str] = []
     music_label: str | None = None
+    voice_label: str | None = None
 
     if music_probe and music_input_count:
         crossfade = number(music.get("crossfade"), 2.0, "music.crossfade")
@@ -238,6 +241,27 @@ def build_audio_filters(
         )
         music_label = "musicbed"
 
+    voiceover = config.get("voiceover") or {}
+    if voiceover_probe and voiceover_input_index is not None:
+        voice_volume = number(voiceover.get("volume"), 1.0, "voiceover.volume")
+        voice_start = number(voiceover.get("start"), 0.0, "voiceover.start")
+        voice_trim_start = number(voiceover.get("trimStart"), 0.0, "voiceover.trimStart")
+        voice_chain = [
+            f"atrim=start={voice_trim_start:.6f}",
+            "asetpts=PTS-STARTPTS",
+            "aresample=48000",
+            "aformat=sample_fmts=fltp:channel_layouts=stereo",
+        ]
+        if voiceover.get("normalize", True):
+            voice_chain.append("loudnorm=I=-16:TP=-1.5:LRA=11")
+        voice_chain.append(f"volume={voice_volume:.6f}")
+        if voice_start > 0:
+            delay_ms = round(voice_start * 1000)
+            voice_chain.append(f"adelay={delay_ms}:all=1")
+        voice_chain.extend(["apad", f"atrim=duration={duration:.6f}"])
+        filters.append(f"[{voiceover_input_index}:a]{','.join(voice_chain)}[voicebase]")
+        voice_label = "voicebase"
+
     keep_source = bool(music.get("keepSourceAudio", config.get("keepSourceAudio", False)))
     source_audio = first_stream(input_probe, "audio")
     source_label: str | None = None
@@ -248,15 +272,34 @@ def build_audio_filters(
         )
         source_label = "sourceaudio"
 
-    if source_label and music_label:
+    mix_labels: list[str] = []
+    if voice_label and music_label:
+        ducking = voiceover.get("ducking") or {}
+        if not isinstance(ducking, dict):
+            raise ValueError("voiceover.ducking must be an object")
+        threshold = number(ducking.get("threshold"), 0.03, "voiceover.ducking.threshold")
+        ratio = number(ducking.get("ratio"), 8.0, "voiceover.ducking.ratio", 1.0)
+        attack = number(ducking.get("attackMs"), 20.0, "voiceover.ducking.attackMs")
+        release = number(ducking.get("releaseMs"), 320.0, "voiceover.ducking.releaseMs")
+        filters.append("[voicebase]asplit=2[voicemix][voicekey]")
         filters.append(
-            f"[{source_label}][{music_label}]amix=inputs=2:duration=first:dropout_transition=0[mixed]"
+            f"[musicbed][voicekey]sidechaincompress=threshold={threshold:.6f}:ratio={ratio:.3f}:attack={attack:.3f}:release={release:.3f}[duckedmusic]"
         )
+        mix_labels.extend(["voicemix", "duckedmusic"])
+    else:
+        if voice_label:
+            mix_labels.append(voice_label)
+        if music_label:
+            mix_labels.append(music_label)
+    if source_label:
+        mix_labels.append(source_label)
+
+    if len(mix_labels) > 1:
+        inputs = "".join(f"[{label}]" for label in mix_labels)
+        filters.append(f"{inputs}amix=inputs={len(mix_labels)}:duration=longest:dropout_transition=0[mixed]")
         current_audio = "mixed"
-    elif source_label:
-        current_audio = source_label
-    elif music_label:
-        current_audio = music_label
+    elif mix_labels:
+        current_audio = mix_labels[0]
     else:
         filters.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={duration:.6f}[silence]")
         current_audio = "silence"
@@ -374,6 +417,19 @@ def finish(plan_path: Path) -> Path:
         for _ in range(repetitions):
             command.extend(["-i", str(music_path)])
 
+    voiceover = config.get("voiceover") or {}
+    if not isinstance(voiceover, dict):
+        raise ValueError("voiceover must be an object")
+    voiceover_probe: dict[str, Any] | None = None
+    voiceover_input_index: int | None = None
+    if voiceover.get("path"):
+        voiceover_path = resolve_path(plan_directory, voiceover["path"], "voiceover.path")
+        voiceover_probe = probe_media(voiceover_path)
+        if not first_stream(voiceover_probe, "audio"):
+            raise ValueError("voiceover file has no audio stream")
+        voiceover_input_index = repetitions + 1
+        command.extend(["-i", str(voiceover_path)])
+
     filters = [video_filter]
     filters.extend(
         build_audio_filters(
@@ -384,6 +440,8 @@ def finish(plan_path: Path) -> Path:
             music_probe,
             repetitions,
             music_tempo,
+            voiceover_probe,
+            voiceover_input_index,
         )
     )
     encoding = config.get("encoding") or {}

@@ -80,13 +80,14 @@ For custom dropdowns, click the trigger and then the visible option. Do not assu
 
 ## Playwright capture
 
-The bundled `scripts/capture_demo.mjs` reads a JSON action plan and records WebM from a real Chromium context. It supports navigation, role or label based clicks, filling, typing, keyboard input, custom option selection, checks, smooth scrolling, conditional waits, visibility assertions, and timed holds.
+The bundled `scripts/capture_demo.mjs` reads a JSON action plan and records WebM from a real Chromium context. It supports navigation, role or label based clicks, filling, typing, keyboard input, custom option selection, checks, smooth scrolling, conditional waits, visibility assertions, and timed holds. Set `timelineOutput` to save sanitized action timings and page paths beside the raw video; secret values and URL query strings are excluded.
 
 Important capture invariants:
 
 - Set viewport and recording size explicitly. Playwright otherwise scales video to a smaller default envelope.
 - Await browser-context closure. The recording is not guaranteed complete before that point.
 - Use a fresh artifact directory for each take.
+- Keep the capture timeline with the take so captions, sound effects, and review notes can point to observed actions.
 - Keep raw footage in the browser-native format. Transcode only in the finishing pass.
 - Prefer one continuous take when the flow is stable. Use separate takes when third-party prompts or long jobs make a single take fragile.
 

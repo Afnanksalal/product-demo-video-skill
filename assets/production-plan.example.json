@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "project": {
+    "title": "Acme launch film",
+    "mode": "launch",
+    "audience": "Operations leaders evaluating workflow automation",
+    "objective": "Show that Acme turns an incoming request into a verified result",
+    "maxDuration": 45,
+    "aspectRatio": "16:9"
+  },
+  "truthSources": [
+    {
+      "id": "live-app",
+      "type": "application",
+      "location": "http://127.0.0.1:3000",
+      "notes": "Local test environment with approved demo data"
+    },
+    {
+      "id": "brand-kit",
+      "type": "asset-folder",
+      "location": "assets/brand",
+      "notes": "Logo, colors, screenshots, and approved claims"
+    }
+  ],
+  "brand": {
+    "tone": "confident, precise, energetic",
+    "primaryColor": "#10B981",
+    "backgroundColor": "#0B0D10",
+    "font": "Inter"
+  },
+  "audio": {
+    "mode": "music",
+    "reference": "assets/product-launch.mp3",
+    "beatSync": true
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "purpose": "hook",
+      "duration": 5,
+      "source": {
+        "type": "title-card",
+        "truthStatus": "illustrative"
+      },
+      "visual": "One bold outcome statement followed by the product mark",
+      "action": "Fast reveal into the real product",
+      "proof": "",
+      "copy": {
+        "title": "From request to verified result",
+        "body": "One workflow. Every step visible."
+      }
+    },
+    {
+      "id": "product",
+      "purpose": "product",
+      "duration": 12,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "live-app"
+      },
+      "visual": "Overview followed by the primary action",
+      "action": "Enter representative data and submit",
+      "proof": "The product accepts the request",
+      "copy": {
+        "title": "Run the workflow",
+        "body": "Use real inputs inside the actual product."
+      }
+    },
+    {
+      "id": "proof",
+      "purpose": "proof",
+      "duration": 18,
+      "source": {
+        "type": "live-capture",
+        "truthStatus": "observed",
+        "truthSourceId": "live-app"
+      },
+      "visual": "Result detail with the generated record visible",
+      "action": "Open the result and inspect its evidence",
+      "proof": "Visible output produced by the recorded action",
+      "copy": {
+        "title": "See the result",
+        "body": "The output is shown, not simulated."
+      }
+    },
+    {
+      "id": "cta",
+      "purpose": "cta",
+      "duration": 6,
+      "source": {
+        "type": "motion-graphic",
+        "truthStatus": "provided",
+        "truthSourceId": "brand-kit"
+      },
+      "visual": "Logo, product URL, and one next step",
+      "action": "Resolve cleanly on the musical phrase",
+      "proof": "",
+      "copy": {
+        "title": "Try Acme",
+        "body": "Run it on your own workflow."
+      }
+    }
+  ]
+}

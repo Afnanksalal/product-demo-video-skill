@@ -34,6 +34,14 @@ ffmpeg -v error -i final.mp4 -f null -
 
 ## Visual gate
 
+Generate a contact sheet before detailed playback review:
+
+```bash
+python scripts/make_contact_sheet.py final.mp4 artifacts/contact-sheet.png --count 12
+```
+
+The adjacent JSON manifest records the sampled timestamps. A contact sheet catches global pacing and framing problems quickly, but it does not replace playback around motion, audio joins, or dense screens.
+
 Inspect actual frames, not only metadata. At minimum inspect:
 
 - the first visible product frame;
@@ -72,6 +80,8 @@ Reject clicks, abrupt restarts, clipping, pumping, silent gaps, or music that ma
 ## Product truth gate
 
 Confirm that every feature name, action, metric, and output shown exists in the captured product. Verify that test data is clearly non-production when necessary and that no unintended credentials, API keys, personal notifications, or unrelated tabs appear.
+
+For launch and pitch videos, compare every factual claim and proof scene against the production plan. Reject illustrative scenes presented as product evidence, unsupported customer or traction claims, and generated UI that could be mistaken for the real application.
 
 ## Delivery gate
 

@@ -86,6 +86,24 @@ function absoluteUrl(baseUrl, destination) {
   return new URL(destination, baseUrl).toString();
 }
 
+function safePageUrl(value) {
+  try {
+    const url = new URL(value);
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return "unavailable";
+  }
+}
+
+function actionSummary(action) {
+  const summary = { type: action.type };
+  for (const key of ["role", "name", "label", "testId", "text", "selector", "key", "url", "path"]) {
+    if (typeof action[key] === "string") summary[key] = action[key];
+  }
+  if (action.type === "hold") summary.ms = action.ms;
+  return summary;
+}
+
 async function smoothScroll(page, action) {
   const durationMs = positiveNumber(action.durationMs, 650, "smoothScroll.durationMs");
   let targetTop = action.top;
@@ -130,6 +148,9 @@ export function validatePlan(plan) {
   positiveNumber(plan.recordingSize.height, null, "recordingSize.height");
   if (!Array.isArray(plan.actions) || plan.actions.length === 0) {
     fail("actions must be a non-empty array");
+  }
+  if (plan.timelineOutput !== undefined && typeof plan.timelineOutput !== "string") {
+    fail("timelineOutput must be a string when provided");
   }
   plan.actions.forEach((action, index) => {
     requireObject(action, `action ${index}`);
@@ -239,6 +260,8 @@ export async function capture(planPath) {
   let video;
   let failed = false;
   let finalPath = outputPath;
+  let timelineStartedAt = 0;
+  const timeline = [];
 
   try {
     context = await browser.newContext({
@@ -263,6 +286,7 @@ export async function capture(planPath) {
       console.error(`[page error] ${error.message}`);
     });
 
+    timelineStartedAt = performance.now();
     await page.goto(absoluteUrl(plan.baseUrl, plan.startPath ?? "/"), {
       waitUntil: plan.initialWaitUntil ?? "domcontentloaded",
     });
@@ -271,14 +295,32 @@ export async function capture(planPath) {
     for (let index = 0; index < plan.actions.length; index += 1) {
       const action = plan.actions[index];
       console.log(`[${index + 1}/${plan.actions.length}] ${action.type} at ${page.url()}`);
+      const startedAtMs = performance.now() - timelineStartedAt;
       try {
         await performAction(page, action, index, plan.baseUrl, planDirectory);
       } catch (error) {
+        timeline.push({
+          index: index + 1,
+          ...actionSummary(action),
+          startedAtMs: Math.round(startedAtMs),
+          endedAtMs: Math.round(performance.now() - timelineStartedAt),
+          status: "failed",
+          page: safePageUrl(page.url()),
+          error: error.message,
+        });
         throw new Error(`action ${index + 1} (${action.type}) failed at ${page.url()}: ${error.message}`);
       }
       if (!new Set(["hold", "waitForUrl", "waitForVisible", "assertVisible"]).has(action.type)) {
         await page.waitForTimeout(action.afterMs ?? actionDelay);
       }
+      timeline.push({
+        index: index + 1,
+        ...actionSummary(action),
+        startedAtMs: Math.round(startedAtMs),
+        endedAtMs: Math.round(performance.now() - timelineStartedAt),
+        status: "passed",
+        page: safePageUrl(page.url()),
+      });
     }
   } catch (error) {
     failed = true;
@@ -294,6 +336,16 @@ export async function capture(planPath) {
 
   if (!video) fail("Playwright did not create a video stream");
   await fs.rm(temporaryDirectory, { recursive: true, force: true });
+  if (plan.timelineOutput) {
+    const timelinePath = path.resolve(planDirectory, plan.timelineOutput);
+    await fs.mkdir(path.dirname(timelinePath), { recursive: true });
+    await fs.writeFile(
+      timelinePath,
+      `${JSON.stringify({ video: finalPath, failed, durationMs: Math.round(performance.now() - timelineStartedAt), actions: timeline }, null, 2)}\n`,
+      "utf8",
+    );
+    console.log(`Capture timeline: ${timelinePath}`);
+  }
   console.log(`${failed ? "Failed take preserved" : "Capture saved"}: ${finalPath}`);
   if (failed) process.exitCode = 1;
   return finalPath;

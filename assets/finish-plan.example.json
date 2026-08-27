@@ -47,6 +47,19 @@
     "maxTempoAdjustmentPercent": 2.5,
     "keepSourceAudio": false
   },
+  "voiceover": {
+    "path": null,
+    "volume": 1.0,
+    "normalize": true,
+    "start": 0,
+    "trimStart": 0,
+    "ducking": {
+      "threshold": 0.03,
+      "ratio": 8,
+      "attackMs": 20,
+      "releaseMs": 320
+    }
+  },
   "encoding": {
     "crf": 18,
     "preset": "slow",

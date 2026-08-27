@@ -77,7 +77,7 @@ Use music the user supplied or a track with clear commercial-use terms. Save a p
 - If there is voiceover, reduce music by roughly 12 to 20 dB under speech and verify intelligibility on laptop speakers.
 - Normalize deliberately. Do not stack normalization and limiting without listening for pumping.
 
-The finishing script can chain as many copies of a music track as needed, crossfade each boundary, make a bounded tempo adjustment to fit the edit, trim to the video duration, and mix optional source audio.
+The finishing script can chain as many copies of a music track as needed, crossfade each boundary, make a bounded tempo adjustment to fit the edit, trim to the video duration, and mix optional source audio. It also accepts a separate voiceover file, normalizes it, and ducks music under speech. Read `audio.md` before using those controls.
 
 ## Export settings
 

@@ -8,8 +8,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from finish_video import ass_escape, ass_time, css_to_ass, music_loop_plan, music_repetitions  # noqa: E402
+from finish_video import (  # noqa: E402
+    ass_escape,
+    ass_time,
+    build_audio_filters,
+    css_to_ass,
+    music_loop_plan,
+    music_repetitions,
+)
 from media_common import media_summary, parse_fraction  # noqa: E402
+from make_contact_sheet import build_filter, layout, timestamps  # noqa: E402
 from probe_video import validate  # noqa: E402
 
 
@@ -34,6 +42,24 @@ class FinishVideoTests(unittest.TestCase):
 
     def test_fraction_parser_handles_video_rates(self) -> None:
         self.assertAlmostEqual(parse_fraction("30000/1001"), 29.97002997, places=6)
+
+    def test_voiceover_ducks_music(self) -> None:
+        config = {
+            "music": {"volume": 0.2, "crossfade": 1.0},
+            "voiceover": {"volume": 1.0, "normalize": True},
+            "fade": {"in": 0, "out": 0},
+        }
+        probe = {"streams": [{"codec_type": "audio"}]}
+        filters = build_audio_filters(config, probe, 0, 10, probe, 1, 1.0, probe, 2)
+        graph = ";".join(filters)
+        self.assertIn("sidechaincompress", graph)
+        self.assertIn("loudnorm=I=-16", graph)
+        self.assertIn("amix=inputs=2", graph)
+
+    def test_contact_sheet_layout_and_samples(self) -> None:
+        self.assertEqual(layout(12), (5, 3))
+        self.assertEqual(timestamps(12, 3), [2.0, 6.0, 10.0])
+        self.assertIn("tile=5x3", build_filter(12, 12, 480, 300))
 
     def test_probe_validation_reports_constraint_failures(self) -> None:
         probe = {

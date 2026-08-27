@@ -58,9 +58,16 @@ def validate_skill(root: Path) -> list[str]:
         "scripts/capture_demo.mjs",
         "scripts/finish_video.py",
         "scripts/probe_video.py",
+        "scripts/make_contact_sheet.py",
+        "scripts/validate_production_plan.py",
         "references/capture.md",
         "references/editing.md",
+        "references/strategy.md",
+        "references/motion.md",
+        "references/audio.md",
+        "references/distribution.md",
         "references/quality.md",
+        "assets/production-plan.example.json",
     ):
         if not (root / relative).is_file():
             errors.append(f"referenced file is missing: {relative}")

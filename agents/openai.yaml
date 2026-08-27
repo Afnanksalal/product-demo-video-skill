@@ -1,10 +1,10 @@
 interface:
   display_name: "Product Demo Video Skill"
-  short_description: "Record and finish premium real-product demos"
+  short_description: "Create real product demos, launch films, and pitches"
   icon_small: "./assets/icon-small.svg"
   icon_large: "./assets/icon-large.svg"
   brand_color: "#10B981"
-  default_prompt: "Use $product-demo-video-skill to record and finish a polished demo of this product."
+  default_prompt: "Use $product-demo-video-skill to create a polished, truth-linked walkthrough, launch film, or pitch video for this product."
 
 policy:
   allow_implicit_invocation: true

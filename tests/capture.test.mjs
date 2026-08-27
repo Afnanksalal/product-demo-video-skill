@@ -26,3 +26,9 @@ test("empty action list is rejected", () => {
   plan.actions = [];
   assert.throws(() => validatePlan(plan), /non-empty array/);
 });
+
+test("timeline output must be a path string", () => {
+  const plan = structuredClone(basePlan);
+  plan.timelineOutput = true;
+  assert.throws(() => validatePlan(plan), /timelineOutput must be a string/);
+});
