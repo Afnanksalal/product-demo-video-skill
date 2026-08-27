@@ -1,0 +1,10 @@
+interface:
+  display_name: "Product Demo Video"
+  short_description: "Record and finish premium real-product demos"
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.svg"
+  brand_color: "#10B981"
+  default_prompt: "Use $product-demo-video to record and finish a polished demo of this product."
+
+policy:
+  allow_implicit_invocation: true

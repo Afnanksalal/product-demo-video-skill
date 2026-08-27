@@ -1,0 +1,19 @@
+{
+  "name": "product-demo-video-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A portable Agent Skill for recording and finishing real-product demo videos.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "capture": "node scripts/capture_demo.mjs",
+    "check:capture": "node --check scripts/capture_demo.mjs",
+    "test": "python -m unittest discover -s tests -p test_*.py && node --test tests/*.test.mjs && npm run check:capture"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  }
+}

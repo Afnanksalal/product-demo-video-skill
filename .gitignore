@@ -1,0 +1,10 @@
+node_modules/
+artifacts/
+output/
+.playwright/
+.cache/
+*.local.json
+.env*
+__pycache__/
+*.pyc
+.DS_Store

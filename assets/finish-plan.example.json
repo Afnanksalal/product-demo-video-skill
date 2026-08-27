@@ -1,0 +1,55 @@
+{
+  "input": "artifacts/product-demo-raw.webm",
+  "output": "artifacts/product-demo-final.mp4",
+  "trimStart": 2.0,
+  "trimEnd": null,
+  "maxDuration": 300,
+  "canvas": {
+    "width": 2560,
+    "height": 1600,
+    "fps": 30,
+    "fit": "cover",
+    "background": "#0B0D10"
+  },
+  "crop": {
+    "left": 0,
+    "top": 48,
+    "right": 0,
+    "bottom": 0
+  },
+  "fade": {
+    "in": 0.45,
+    "out": 0.65
+  },
+  "captions": [
+    {
+      "start": 8.0,
+      "end": 13.5,
+      "title": "Live overview",
+      "body": "Start with the current product state before changing anything.",
+      "position": "bottom"
+    }
+  ],
+  "captionStyle": {
+    "font": "Inter",
+    "titleSize": 50,
+    "bodySize": 30,
+    "marginHorizontal": 150,
+    "marginVertical": 110,
+    "textColor": "#FFFFFF",
+    "accentColor": "#34D399",
+    "backgroundColor": "#111827D9"
+  },
+  "music": {
+    "path": "assets/product-launch.mp3",
+    "volume": 0.22,
+    "crossfade": 2.0,
+    "maxTempoAdjustmentPercent": 2.5,
+    "keepSourceAudio": false
+  },
+  "encoding": {
+    "crf": 18,
+    "preset": "slow",
+    "audioBitrate": "192k"
+  }
+}

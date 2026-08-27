@@ -1,0 +1,64 @@
+{
+  "baseUrl": "http://127.0.0.1:3000",
+  "startPath": "/",
+  "output": "artifacts/product-demo-raw.webm",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "recordingSize": {
+    "width": 1440,
+    "height": 900
+  },
+  "headless": true,
+  "storageState": null,
+  "defaultTimeoutMs": 15000,
+  "actionDelayMs": 450,
+  "actions": [
+    {
+      "type": "hold",
+      "ms": 2500
+    },
+    {
+      "type": "click",
+      "role": "link",
+      "name": "Open app"
+    },
+    {
+      "type": "waitForUrl",
+      "url": "**/app"
+    },
+    {
+      "type": "hold",
+      "ms": 1500
+    },
+    {
+      "type": "smoothScroll",
+      "top": 620,
+      "durationMs": 650
+    },
+    {
+      "type": "click",
+      "role": "button",
+      "name": "Create purchase"
+    },
+    {
+      "type": "fill",
+      "label": "Description",
+      "value": "API monitoring subscription"
+    },
+    {
+      "type": "fill",
+      "label": "Password",
+      "valueFromEnv": "DEMO_PASSWORD"
+    },
+    {
+      "type": "assertVisible",
+      "text": "Purchase created"
+    },
+    {
+      "type": "hold",
+      "ms": 2000
+    }
+  ]
+}
