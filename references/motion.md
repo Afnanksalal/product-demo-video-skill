@@ -69,6 +69,8 @@ Use Genmotion when the brief calls for title cards, brand choreography, diagrams
 
 Run `npx genmotion catalog "<the semantic move>"` before assigning motion. Build from named motion recipes and contrastive reference decisions rather than copying a complete template. Every chosen reference must record what the direction borrows, avoids, and transforms.
 
+When the user wants to compare directions or tune exact hierarchy, geometry, motion timing, keyframes, scene holds, transitions, references, or export settings, launch `npx genmotion studio <project>`. Treat Studio edits and queued agent requests as authoritative collaboration state. Resolve a request only after its real Creative IR edit validates and the affected native frames have been inspected.
+
 Keep animation driven by timeline time or frame number so preview, seeking, and render agree. Freeze third-party media locally with provenance. Run `npx genmotion validate <project> --strict`, render representative native stills with `npx genmotion frame`, and review `npx genmotion preview` before the full encode. After rendering, run `npx genmotion probe` and generate a contact sheet.
 
 Use FFmpeg directly only for capture cleanup, assembly, raw-footage captions, audio finishing, and final conformance. Genmotion owns constructed scene layout, motion, native rendering, and encoding.
