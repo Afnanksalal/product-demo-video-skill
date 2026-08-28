@@ -19,6 +19,6 @@ async function resolveEntry() {
 
 const entry = await resolveEntry();
 try { await access(entry); }
-catch { throw new Error('Genmotion MCP is unavailable. Install Genmotion 1.8.0 or newer, then run this launcher again.'); }
+catch { throw new Error('Genmotion MCP is unavailable. Install Genmotion 1.9.1 or newer, then run this launcher again.'); }
 
 await import(pathToFileURL(entry).href);

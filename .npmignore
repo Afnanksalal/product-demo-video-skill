@@ -1,0 +1,11 @@
+videos/
+artifacts/
+output/
+.playwright/
+.cache/
+node_modules/
+__pycache__/
+*.pyc
+*.local.json
+.env*
+.DS_Store

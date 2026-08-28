@@ -4,7 +4,7 @@ description: Create polished product walkthroughs, launch films, and pitch video
 license: MIT
 metadata:
   author: afnanksalal
-  version: "2.9.0"
+  version: "2.9.1"
 ---
 
 # Product Demo Video Skill
@@ -115,7 +115,7 @@ Use [scripts/finish_video.py](scripts/finish_video.py) for the common finishing 
 python scripts/finish_video.py path/to/finish-plan.json
 ```
 
-For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use the callable Genmotion MCP tools. Start with `genmotion_doctor` and `genmotion_schema`, create a neutral truth-linked project with `genmotion_init`, then author the composition through revision-safe `genmotion_project_read` and granular `genmotion_project_patch`. Use arbitrary property tracks, custom cubic-bezier or spring timing, and SVG paths when the direction needs them; recipes and catalogs are optional reference material, not the animation language. Validate with `genmotion_validate`, inspect evaluated state with `genmotion_timeline_inspect`, and examine the image returned by `genmotion_frame` before rendering. Render with `genmotion_render`, then call `genmotion_probe` and `genmotion_contact_sheet`. Use `genmotion_studio_start` when the user wants direct visual iteration. Do not replace these calls with Remotion, HyperFrames, HTML compositions, ad hoc constructed-scene FFmpeg graphs, or reconstructed product interfaces. If the tools are unavailable, report that Genmotion 1.9.0 or newer must be registered; do not silently switch renderers.
+For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use the callable Genmotion MCP tools. Start with `genmotion_doctor` and `genmotion_schema`, create a neutral truth-linked project with `genmotion_init`, then author the composition through revision-safe `genmotion_project_read` and granular `genmotion_project_patch`. Use arbitrary property tracks, custom cubic-bezier or spring timing, and SVG paths when the direction needs them; recipes and catalogs are optional reference material, not the animation language. Validate with `genmotion_validate`, inspect evaluated state with `genmotion_timeline_inspect`, and examine the image returned by `genmotion_frame` before rendering. Render with `genmotion_render`, then call `genmotion_probe` and `genmotion_contact_sheet`. Use `genmotion_studio_start` when the user wants direct visual iteration. Do not replace these calls with Remotion, HyperFrames, HTML compositions, ad hoc constructed-scene FFmpeg graphs, or reconstructed product interfaces. If the tools are unavailable, report that Genmotion 1.9.1 or newer must be registered; do not silently switch renderers.
 
 Genmotion is only the constructed-motion surface. It must not record the browser, simulate product proof, trim captured footage, burn captions onto raw recordings, choose licensed music, or assemble the final demo. Keep those responsibilities with Playwright capture and the bundled finishing scripts. Studio connects to the authenticated Codex or Claude Code installation already on the machine and does not require a model API key.
 

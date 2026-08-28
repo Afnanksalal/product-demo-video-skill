@@ -31,7 +31,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - FFmpeg and ffprobe on `PATH`
 - Chromium installed through Playwright for browser capture
 
-Genmotion 1.9.0 is bundled as an exact package artifact so the callable renderer and agent authoring tools do not drift between installs.
+Genmotion 1.9.1 is bundled as an exact package artifact so the callable renderer and agent authoring tools do not drift between installs.
 
 ## Install for Codex
 
