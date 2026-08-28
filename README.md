@@ -1,6 +1,6 @@
 # Product Demo Video Skill
 
-An open Agent Skill for creating polished product walkthroughs, launch films, and pitch videos. It combines product strategy, truth-linked storyboards, real Playwright browser capture, designed motion, FFmpeg finishing, voiceover ducking, captions, licensed music, multi-format delivery, and technical plus visual QA.
+An open Agent Skill for creating polished product walkthroughs, launch films, and pitch videos. It combines product strategy, truth-linked storyboards, real Playwright browser capture, native designed motion through Genmotion, FFmpeg capture finishing, voiceover ducking, captions, licensed music, multi-format delivery, and technical plus visual QA.
 
 It treats the real product as the proof layer. Designed or generated visuals can frame a story, but they cannot impersonate an observed feature, result, customer, or metric. Raw masters and production facts remain reproducible until the finished video passes review.
 
@@ -17,7 +17,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - title plus smaller explanatory captions;
 - voiceover normalization with automatic music ducking;
 - beat-aware editing and crossfaded background-music loops with provenance requirements;
-- designed launch and pitch scenes through an available deterministic timeline engine;
+- designed launch and pitch scenes through the native [Genmotion](https://github.com/Afnanksalal/genmotion) renderer and taste system;
 - landscape, vertical, square, and feed-safe delivery guidance;
 - automated contact sheets for visual review;
 - H.264/AAC high-resolution exports;
@@ -26,7 +26,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 ## Requirements
 
 - Python 3.10 or newer
-- Node.js 20 or newer for browser capture
+- Node.js 22 or newer for browser capture and Genmotion
 - FFmpeg and ffprobe on `PATH`
 - Chromium installed through Playwright for browser capture
 
@@ -84,6 +84,7 @@ Common commands:
 ```bash
 npm install
 npx playwright install chromium
+npx genmotion doctor --json
 python scripts/validate_production_plan.py path/to/production-plan.json
 node scripts/capture_demo.mjs path/to/capture-plan.json
 python scripts/finish_video.py path/to/finish-plan.json
@@ -95,7 +96,7 @@ python scripts/make_contact_sheet.py final.mp4 artifacts/contact-sheet.png --cou
 
 - **Strategy layer:** chooses walkthrough, launch, or pitch and links each proof beat to a real source.
 - **Capture layer:** records the actual product with deterministic interactions and a sanitized timing manifest.
-- **Design layer:** uses product-native art direction and a deterministic timeline engine when constructed scenes are needed.
+- **Design layer:** uses Genmotion's contrastive taste system, typed Creative IR, native Skia renderer, and deterministic timeline when constructed scenes are needed.
 - **Finish layer:** handles trimming, framing, captions, voiceover, music, fades, and delivery encoding with FFmpeg.
 - **Review layer:** validates media constraints, decodes the full export when needed, and produces a contact sheet for visual inspection.
 

@@ -1,12 +1,12 @@
 {
   "name": "product-demo-video-skill",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "private": true,
   "description": "A portable Agent Skill for real product walkthroughs, launch films, and pitch videos.",
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "capture": "node scripts/capture_demo.mjs",
@@ -14,6 +14,7 @@
     "test": "python -m unittest discover -s tests -p test_*.py && node --test tests/*.test.mjs && npm run check:capture"
   },
   "dependencies": {
+    "genmotion": "https://github.com/Afnanksalal/genmotion/releases/download/v1.0.0/genmotion-1.0.0.tgz",
     "playwright": "^1.62.1"
   }
 }

@@ -4,7 +4,7 @@ description: Create polished product walkthroughs, launch films, and pitch video
 license: MIT
 metadata:
   author: afnanksalal
-  version: "1.1.0"
+  version: "2.0.0"
 ---
 
 # Product Demo Video Skill
@@ -115,7 +115,7 @@ Use [scripts/finish_video.py](scripts/finish_video.py) for the common finishing 
 python scripts/finish_video.py path/to/finish-plan.json
 ```
 
-For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use a deterministic timeline engine such as Remotion or HyperFrames when available, or the user's installed editor. Use FFmpeg for capture cleanup, assembly, captions, audio finishing, and conformance. Preserve the same source, timing plan, and QA requirements.
+For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use Genmotion. Do not introduce Remotion, HyperFrames, HTML compositions, or reconstructed product interfaces. Run `npx genmotion doctor --json`, author a truth-linked `brief.json`, generate divergent directions with `npx genmotion plan`, validate with `npx genmotion validate --strict`, inspect native frames and preview, then render the accepted composition. Use the bundled FFmpeg finishing path only for capture cleanup, assembly, captions on raw footage, audio finishing, and delivery conformance.
 
 ### 6. Validate and inspect
 

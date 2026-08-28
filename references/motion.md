@@ -65,6 +65,10 @@ Designed scenes should bridge, frame, or explain real proof. They should not rep
 
 ## Constructed launch and pitch scenes
 
-Use a deterministic timeline engine such as Remotion, HyperFrames, or the user's installed editor when the brief calls for title cards, brand choreography, diagrams, data visualization, multiple media layers, or reusable aspect-ratio variants. Use FFmpeg for capture cleanup, assembly, captions, audio finishing, and final conformance.
+Use Genmotion when the brief calls for title cards, brand choreography, diagrams, data visualization, multiple media layers, or reusable aspect-ratio variants. Do not use Remotion, HyperFrames, HTML compositions, or browser capture as a designed-motion renderer.
 
-Keep animation driven by timeline time or frame number so preview, seeking, and render agree. Freeze third-party media locally with provenance. Render representative stills before a full encode and review the pilot before building all scenes.
+Run `npx genmotion catalog "<the semantic move>"` before assigning motion. Build from named motion recipes and contrastive reference decisions rather than copying a complete template. Every chosen reference must record what the direction borrows, avoids, and transforms.
+
+Keep animation driven by timeline time or frame number so preview, seeking, and render agree. Freeze third-party media locally with provenance. Run `npx genmotion validate <project> --strict`, render representative native stills with `npx genmotion frame`, and review `npx genmotion preview` before the full encode. After rendering, run `npx genmotion probe` and generate a contact sheet.
+
+Use FFmpeg directly only for capture cleanup, assembly, raw-footage captions, audio finishing, and final conformance. Genmotion owns constructed scene layout, motion, native rendering, and encoding.
