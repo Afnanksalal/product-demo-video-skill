@@ -31,7 +31,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - FFmpeg and ffprobe on `PATH`
 - Chromium installed through Playwright for browser capture
 
-Genmotion 1.8.0 is bundled as an exact package artifact so the callable renderer does not drift between installs.
+Genmotion 1.9.0 is bundled as an exact package artifact so the callable renderer and agent authoring tools do not drift between installs.
 
 ## Install for Codex
 
@@ -117,7 +117,7 @@ python scripts/make_contact_sheet.py final.mp4 artifacts/contact-sheet.png --cou
 
 - **Strategy layer:** chooses walkthrough, launch, or pitch and links each proof beat to a real source.
 - **Capture layer:** records the actual product with deterministic interactions and a sanitized timing manifest.
-- **Design layer:** uses Genmotion's contrastive taste system, typed Creative IR, native Skia renderer, and deterministic timeline when constructed scenes are needed.
+- **Design layer:** uses Genmotion's open Creative IR, transactional agent patches, arbitrary property tracks, visual frame responses, Studio, and native Skia renderer when constructed scenes are needed.
 - **Agent layer:** routes Studio direction through the user's existing local Codex or Claude Code sign-in, persists one project conversation per host, and validates edits before Studio reloads them.
 - **Finish layer:** handles trimming, framing, captions, voiceover, music, fades, and delivery encoding with FFmpeg.
 - **Review layer:** validates media constraints, decodes the full export when needed, and produces a contact sheet for visual inspection.
