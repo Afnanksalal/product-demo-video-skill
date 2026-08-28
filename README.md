@@ -31,6 +31,8 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - FFmpeg and ffprobe on `PATH`
 - Chromium installed through Playwright for browser capture
 
+Genmotion 1.8.0 is bundled as an exact package artifact so the callable renderer does not drift between installs.
+
 ## Install for Codex
 
 Clone the repository into your user skills directory:
@@ -45,6 +47,14 @@ PowerShell:
 
 ```powershell
 git clone https://github.com/Afnanksalal/product-demo-video-skill.git "$HOME\.agents\skills\product-demo-video-skill"
+```
+
+Install dependencies and register the local Genmotion tool server once:
+
+```bash
+cd ~/.agents/skills/product-demo-video-skill
+npm install
+node scripts/register_genmotion_tools.mjs --codex
 ```
 
 ## Install for Claude Code
@@ -62,6 +72,16 @@ PowerShell:
 ```powershell
 git clone https://github.com/Afnanksalal/product-demo-video-skill.git "$HOME\.claude\skills\product-demo-video-skill"
 ```
+
+Then register the same local tools with Claude Code:
+
+```bash
+cd ~/.claude/skills/product-demo-video-skill
+npm install
+node scripts/register_genmotion_tools.mjs --claude
+```
+
+Repository-scoped Claude Code installs can use the included `.mcp.json`. Registration launches a local stdio process, requires no model API key, and grants Genmotion access only to the host's current working directory unless `GENMOTION_ALLOWED_ROOTS` is explicitly configured.
 
 ## Use
 
@@ -85,8 +105,7 @@ Common commands:
 ```bash
 npm install
 npx playwright install chromium
-npx genmotion doctor --json
-npx genmotion studio path/to/genmotion-project
+node scripts/register_genmotion_tools.mjs
 python scripts/validate_production_plan.py path/to/production-plan.json
 node scripts/capture_demo.mjs path/to/capture-plan.json
 python scripts/finish_video.py path/to/finish-plan.json

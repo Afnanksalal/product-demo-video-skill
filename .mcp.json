@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "genmotion": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["scripts/run_genmotion_mcp.mjs"]
+    }
+  }
+}

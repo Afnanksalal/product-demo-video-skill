@@ -4,7 +4,7 @@ description: Create polished product walkthroughs, launch films, and pitch video
 license: MIT
 metadata:
   author: afnanksalal
-  version: "2.7.0"
+  version: "2.8.0"
 ---
 
 # Product Demo Video Skill
@@ -115,7 +115,9 @@ Use [scripts/finish_video.py](scripts/finish_video.py) for the common finishing 
 python scripts/finish_video.py path/to/finish-plan.json
 ```
 
-For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use Genmotion. Do not introduce Remotion, HyperFrames, HTML compositions, or reconstructed product interfaces. Run `npx genmotion doctor --json`, author a truth-linked `brief.json`, and generate divergent directions with `npx genmotion plan`. When the user wants to direct or iterate visually, launch `npx genmotion studio <project>` and use its workflow, reference board, direct canvas transforms, magnetic layer and audio timeline, motion phases, project-local JSON motion libraries, history, and local-agent chat. Studio connects to the authenticated Codex or Claude Code installation already on the machine and does not require a model API key. If you are already handling feedback in the user's current chat, use the durable `genmotion requests` and `genmotion request-resolve` handoff instead of starting a duplicate embedded turn. Validate with `npx genmotion validate --strict`, inspect native frames, then render the accepted composition. Use the bundled FFmpeg finishing path only for capture cleanup, assembly, captions on raw footage, audio finishing, and delivery conformance.
+For title cards, diagrams, brand choreography, reusable scenes, or layered pitch visuals, use the callable Genmotion MCP tools. Start with `genmotion_doctor`, author a truth-linked brief, use `genmotion_init`, `genmotion_plan`, and `genmotion_catalog`, then edit through revision-safe `genmotion_project_read` and `genmotion_project_save`. Validate with `genmotion_validate`, inspect exact frames with `genmotion_frame`, render with `genmotion_render`, and finish the acceptance pass with `genmotion_probe` plus `genmotion_contact_sheet`. Use `genmotion_studio_start` when the user wants direct visual iteration. Do not replace these calls with Remotion, HyperFrames, HTML compositions, ad hoc constructed-scene FFmpeg graphs, or reconstructed product interfaces. If the tools are unavailable, report that Genmotion 1.8.0 or newer must be registered; do not silently switch renderers.
+
+Genmotion is only the constructed-motion surface. It must not record the browser, simulate product proof, trim captured footage, burn captions onto raw recordings, choose licensed music, or assemble the final demo. Keep those responsibilities with Playwright capture and the bundled finishing scripts. Studio connects to the authenticated Codex or Claude Code installation already on the machine and does not require a model API key.
 
 ### 6. Validate and inspect
 
