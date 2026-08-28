@@ -18,7 +18,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - voiceover normalization with automatic music ducking;
 - beat-aware editing and crossfaded background-music loops with provenance requirements;
 - designed launch and pitch scenes through the native [Genmotion](https://github.com/Afnanksalal/genmotion) renderer and taste system;
-- human-directed iteration through Genmotion Studio's node workflow, native preview, frame-snapped motion-phase editor, reference board, property inspector, revision history, and agent request inbox;
+- human-directed iteration through Genmotion Studio's node workflow, native preview, frame-snapped motion-phase editor, reference board, property inspector, revision history, and authenticated local Codex or Claude chat;
 - landscape, vertical, square, and feed-safe delivery guidance;
 - automated contact sheets for visual review;
 - H.264/AAC high-resolution exports;
@@ -99,6 +99,7 @@ python scripts/make_contact_sheet.py final.mp4 artifacts/contact-sheet.png --cou
 - **Strategy layer:** chooses walkthrough, launch, or pitch and links each proof beat to a real source.
 - **Capture layer:** records the actual product with deterministic interactions and a sanitized timing manifest.
 - **Design layer:** uses Genmotion's contrastive taste system, typed Creative IR, native Skia renderer, and deterministic timeline when constructed scenes are needed.
+- **Agent layer:** routes Studio direction through the user's existing local Codex or Claude Code sign-in, persists one project conversation per host, and validates edits before Studio reloads them.
 - **Finish layer:** handles trimming, framing, captions, voiceover, music, fades, and delivery encoding with FFmpeg.
 - **Review layer:** validates media constraints, decodes the full export when needed, and produces a contact sheet for visual inspection.
 
