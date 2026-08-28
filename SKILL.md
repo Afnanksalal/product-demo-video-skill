@@ -4,7 +4,7 @@ description: Create polished product walkthroughs, launch films, and pitch video
 license: MIT
 metadata:
   author: afnanksalal
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # Product Demo Video Skill

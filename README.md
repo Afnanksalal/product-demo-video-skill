@@ -18,7 +18,7 @@ It treats the real product as the proof layer. Designed or generated visuals can
 - voiceover normalization with automatic music ducking;
 - beat-aware editing and crossfaded background-music loops with provenance requirements;
 - designed launch and pitch scenes through the native [Genmotion](https://github.com/Afnanksalal/genmotion) renderer and taste system;
-- human-directed iteration through Genmotion Studio's node workflow, reference board, timeline, property inspector, revision history, and agent request inbox;
+- human-directed iteration through Genmotion Studio's node workflow, native preview, frame-snapped motion-phase editor, reference board, property inspector, revision history, and agent request inbox;
 - landscape, vertical, square, and feed-safe delivery guidance;
 - automated contact sheets for visual review;
 - H.264/AAC high-resolution exports;
